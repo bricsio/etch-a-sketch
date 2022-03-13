@@ -5,10 +5,33 @@ for (i = 0; i < 256; i++) {
     document.getElementById("grid-container").appendChild(div);
 }
 
-// Listen for hover to make hovered cells change color.
+/*
+Listen for hover to make hovered cells change color. 
+If cell has rgb, then darken it by 10%.
+*/
 const cells = Array.from(document.querySelectorAll(".grid-cell"));
 cells.forEach(cell => cell.addEventListener("mouseover", e => {
-    e.target.style.backgroundColor = "green";
+    let r, 
+        g, 
+        b, 
+        rgb = e.target.style.backgroundColor;
+    // create random RGB
+    if ( rgb == "") {
+        r = Math.floor(Math.random() * 256);
+        g = Math.floor(Math.random() * 256);
+        b = Math.floor(Math.random() * 256);
+        rgb = `rgb(${r}, ${g}, ${b})`;
+        e.target.style.backgroundColor = `${rgb}`;
+    } else {
+        rgb = rgb.substring(5, rgb.length-1).split(",");
+        // console.log(rgb);
+        r = rgb[0] - 255 * .1;
+        g = rgb[1] - 255 * .1;
+        b = rgb[2] - 255 * .1;
+        rgb = `rgb(${r}, ${g}, ${b})`;
+        // console.log(rgb);
+        e.target.style.backgroundColor = `${rgb}`;
+    }
 }));
 
 /*
@@ -43,7 +66,26 @@ clearButton.addEventListener("click", e => {
     // Add hover listener to created cells
     const newCells = Array.from(document.querySelectorAll(".grid-cell"));
     newCells.forEach(cell => cell.addEventListener("mouseover", e => {
-        e.target.style.backgroundColor = "green";
-    }));
+        let r, 
+        g, 
+        b, 
+        rgb = e.target.style.backgroundColor;
+    // create random RGB
+    if ( rgb == "") {
+        r = Math.floor(Math.random() * 256);
+        g = Math.floor(Math.random() * 256);
+        b = Math.floor(Math.random() * 256);
+        rgb = `rgb(${r}, ${g}, ${b})`;
+        e.target.style.backgroundColor = `${rgb}`;
+    } else {
+        rgb = rgb.substring(5, rgb.length-1).split(",");
+        // console.log(rgb);
+        r = rgb[0] - 255 * .1;
+        g = rgb[1] - 255 * .1;
+        b = rgb[2] - 255 * .1;
+        rgb = `rgb(${r}, ${g}, ${b})`;
+        // console.log(rgb);
+        e.target.style.backgroundColor = `${rgb}`;
+    }}));
 });
 
